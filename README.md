@@ -17,11 +17,14 @@
 - OpenAI Whisper API / GPT
 - PubMed E-utilities API
 
-## セットアップ
+## 起動手順
 
 ```bash
-npm install
-cp .env.local.example .env.local  # APIキーを設定
-npx prisma db push
-npm run dev
+cd (自身のローカルディレクトリ)/clinical-notes-app # ローカルにクローンしたディレクトリに移動
+npm install # 依存パッケージをインストール
+cp .env.local.example .env.local  # .env.local.exapmleを.evn.localにコピー
+OPENAI_API_KEY="(取得したOpenAI APIキー)" # .env.localにAPIキーを設定
+npx prisma db push # データベースを作成
+npm run dev # アプリケーションを起動
+http://localhost:3000 # ブラウザでアプリケーションを開く
 ```
