@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id            Int           @id @default(autoincrement())
+  title         String
+  audioPath     String
+  transcription String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  learnings     Learning[]
+  challenges    Challenge[]
+  medicalTerms  MedicalTerm[]
+}
+
+model Learning {
+  id        Int     @id @default(autoincrement())
+  content   String
+  sessionId Int
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model Challenge {
+  id        Int     @id @default(autoincrement())
+  content   String
+  sessionId Int
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model MedicalTerm {
+  id           Int                    @id @default(autoincrement())
+  original     String
+  resolved     Boolean                @default(false)
+  resolvedTerm String?
+  sessionId    Int
+  session      Session                @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  candidates   MedicalTermCandidate[]
+}
+
+model MedicalTermCandidate {
+  id            Int         @id @default(autoincrement())
+  term          String
+  medicalTermId Int
+  medicalTerm   MedicalTerm @relation(fields: [medicalTermId], references: [id], onDelete: Cascade)
+}

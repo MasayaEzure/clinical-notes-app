@@ -14,5 +14,14 @@
 - Next.js (App Router, TypeScript)
 - Tailwind CSS
 - SQLite (Prisma)
-- OpenAI Whisper API
+- OpenAI Whisper API / GPT
 - PubMed E-utilities API
+
+## セットアップ
+
+```bash
+npm install
+cp .env.local.example .env.local  # APIキーを設定
+npx prisma db push
+npm run dev
+```
